@@ -1,5 +1,6 @@
 #==============================================================================#
-# Daniel Nichol - 08/06/2015.
+# By Daniel Nichol - 08/06/2015.
+# With Modifications from Nikhil Krishnan 25/11/20
 #
 # Implements the Markov Chain model for SSWM dyanmics evolution on fitness 
 # landscapes presented in: 
@@ -179,10 +180,9 @@ def limitMatrix(P):
 # Given a two stochastic Matrix P, finds the edge flips, returned in a matrix as -1
 ################################################################################
 def edgeFlips(P1,P2):
-    binary_1 = np.ceil(np.triu(P1)-np.tril(P1).T)
-    binary_2 = np.ceil(np.triu(P2)-np.tril(P2).T)
-    diff = np.multiply(binary_1,binary_2)
-    diff[diff>-1]=0
+    binary_1 = np.ceil(np.triu(P1))-np.ceil(np.tril(P1).T)
+    binary_2 = np.ceil(np.triu(P2))-np.ceil(np.tril(P2).T)
+    diff = binary_1-binary_2
     return diff
 
 #===========================================================================================#
